@@ -15,7 +15,7 @@ Console local para o emulador Pub/Sub. Outra aplicação usa o mesmo emulador. E
 podman compose up --build
 ```
 
-- UI: http://localhost:8080
+- UI: http://localhost:7654
 - API no host: http://localhost:5080 (no container a API escuta `8080`)
 - Emulador: `localhost:8085`
 
@@ -33,6 +33,14 @@ cd frontend && npm run build
 - `frontend/src/pages/` — uma tela por arquivo, CSS ao lado (`*.module.css`)
 - `frontend/src/ui.module.css` e `app.css` — peças compartilhadas e tokens
 - `docker-compose.yml` — `pubsub`, `api`, `web`
+
+## Commits
+
+**Todo commit usa Conventional Commits em português, com corpo detalhando o que foi alterado.**
+
+- Primeira linha: `tipo: descrição` no imperativo, curta.
+- Corpo: o que mudou e por quê. Sem corpo de uma linha só quando a mudança tem mais de um motivo.
+- Tipos: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`.
 
 ## Convenções
 

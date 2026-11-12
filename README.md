@@ -1,12 +1,33 @@
-# Tutu — console do emulador Pub/Sub
+# Tutu
 
-UI local para listar/criar tópicos e subscriptions, publicar e puxar mensagens numa fila própria `tutu-*` (não compete com outras apps no mesmo emulador).
+Interface de monitoramento do Pub/Sub para testes de integração locais. O objetivo é exercitar filas na máquina, sem publicar no GCP.
+
+O Tutu mostra o que entra na fila e como ela se comporta: tópicos, subscriptions, mensagens, confirmações, rejeições e quarentena. A observação usa subscriptions `tutu-*`, para não competir com a aplicação que já consome o mesmo emulador.
+
+O runtime é o [emulador oficial do Pub/Sub](https://cloud.google.com/pubsub/docs/emulator). Esta interface não substitui esse emulador; ela sobe junto com ele e expõe o que está acontecendo.
+
+## Fluxo
+
+1. Suba o Tutu.
+2. Rode o projeto, microserviço ou monólito sob teste.
+3. Aponte as variáveis de ambiente do Pub/Sub para o emulador local, em vez do GCP. O projeto local é `pedidos-local` e o emulador escuta em `localhost:8085`.
+4. Publique e consuma como no teste de integração, ou pare no depurador. Acompanhe a fila em http://localhost:7654.
+
+## Como executar
 
 ```bash
 podman compose up --build
 ```
 
-Abra http://localhost:8080. Emulador em `localhost:8085`, projeto `pedidos-local`. API direta em `localhost:5080`.
+- Interface: http://localhost:7654
+- API no host: http://localhost:5080 (no container a API escuta `8080`)
+- Emulador: `localhost:8085`
+
+```bash
+dotnet test backend/Tutu.Api.Tests
+cd frontend && npm run dev    # http://127.0.0.1:5173, proxy /api e /metrics para :5080
+cd frontend && npm run build
+```
 
 ## Backend
 
@@ -38,3 +59,14 @@ Não há `UseExceptionHandler`. `Handle` nas rotas que mudam o emulador captura 
 Fora do gRPC: id inválido e payload que não é JSON → 400; pull/ack/nack fora de `tutu-*` → 403. Replay de mensagem que não está na quarentena → 404.
 
 `/api/health` não passa por `Handle`: emulador fora vira `online: false`. O poll do `CatalogHub` engole a falha, loga `CatalogPollFailed` e emite o mesmo health offline. Porta ocupada no `Run` vira log `PortInUse` e exit code 1.
+
+## Roadmap
+
+- Suporte a gRPC na interface, além do acesso HTTP atual.
+- Validação de esquemas das mensagens publicadas e consumidas.
+- Carga de teste com replay de mensagens.
+- Cadastro de testes: ao voltar, os testes salvos continuam disponíveis e podem ser reexecutados.
+
+## Referências
+
+- [Emulador do Pub/Sub](https://cloud.google.com/pubsub/docs/emulator)

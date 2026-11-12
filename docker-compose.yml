@@ -33,6 +33,6 @@ services:
   web:
     build: ./frontend
     ports:
-      - "8080:80"
+      - "7654:80"
     depends_on:
       - api
