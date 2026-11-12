@@ -1,0 +1,38 @@
+services:
+  pubsub:
+    image: gcr.io/google.com/cloudsdktool/google-cloud-cli:593.0.0-emulators
+    command:
+      - gcloud
+      - beta
+      - emulators
+      - pubsub
+      - start
+      - --project=pedidos-local
+      - --host-port=0.0.0.0:8085
+    ports:
+      - "8085:8085"
+    healthcheck:
+      test: ["CMD", "curl", "--silent", "--fail", "--max-time", "2", "http://127.0.0.1:8085"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+      start_period: 10s
+
+  api:
+    build: ./backend
+    ports:
+      - "5080:8080"
+    environment:
+      PUBSUB_EMULATOR_HOST: pubsub:8085
+      GOOGLE_CLOUD_PROJECT: pedidos-local
+      ASPNETCORE_URLS: http://0.0.0.0:8080
+    depends_on:
+      pubsub:
+        condition: service_healthy
+
+  web:
+    build: ./frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - api

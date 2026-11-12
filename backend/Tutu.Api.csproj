@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <RootNamespace>Tutu.Api</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Cloud.PubSub.V1" Version="3.39.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Tutu.Api.Tests/**" />
+    <Content Remove="Tutu.Api.Tests/**" />
+    <None Remove="Tutu.Api.Tests/**" />
+  </ItemGroup>
+
+</Project>

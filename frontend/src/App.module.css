@@ -1,0 +1,48 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--space-lg);
+  background: rgb(0 0 0 / 0.5);
+}
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+  max-width: 28rem;
+  padding: var(--space-lg);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface-container-low);
+  box-shadow: var(--shadow-xl);
+}
+
+.dialog-head,
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.dialog-head {
+  justify-content: space-between;
+}
+
+.actions {
+  justify-content: flex-end;
+  gap: var(--space-sm);
+}
+
+.close {
+  composes: icon-quiet from './ui.module.css';
+  padding: var(--space-xs);
+  border-radius: var(--radius-lg);
+}
+
+.input {
+  composes: field field-mono from './ui.module.css';
+  padding: var(--space-sm) var(--space-md);
+}

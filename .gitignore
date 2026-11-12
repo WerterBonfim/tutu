@@ -1,0 +1,51 @@
+# .NET
+[Bb]in/
+[Oo]bj/
+.vs/
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+appsettings.Development.json
+appsettings.*.local.json
+TestResults/
+
+# Node, Vite e Svelte
+node_modules/
+dist/
+dist-ssr/
+build/
+.next/
+out/
+.svelte-kit/
+.vite/
+.cache/
+.eslintcache
+*.tsbuildinfo
+*.local
+
+# Segredos
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea/
+.cursor/
+**/.vscode/*
+!**/.vscode/extensions.json
+*.swp
+*.swo
+*~
+
+# Logs e temporários
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db

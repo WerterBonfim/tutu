@@ -1,0 +1,13 @@
+﻿{
+  "profiles": {
+    "Tutu.Api": {
+      "commandName": "Project",
+      "applicationUrl": "http://0.0.0.0:5080",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "PUBSUB_EMULATOR_HOST": "localhost:8085",
+        "GOOGLE_CLOUD_PROJECT": "pedidos-local"
+      }
+    }
+  }
+}

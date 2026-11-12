@@ -1,0 +1,13 @@
+.card {
+  composes: card from '../ui.module.css';
+  max-width: 36rem;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  color: var(--color-primary);
+  font-size: 24px;
+}
